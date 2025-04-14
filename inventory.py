@@ -3,10 +3,10 @@ SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.WHITE
 
 class Inventory:
     def __init__(self):
-        self.money = 100
+        self.money = 1000
         self.wood = 15
-        self.tree = 3
-        self.flowers = 15
+        self.tree = 1000
+        self.flowers = 100
         self.flowerSeeds = 3
         self.water = 0
         self.freshFish = 0
@@ -20,12 +20,18 @@ class Inventory:
         self.food = 0
 
     def showInv(self):
-        print(self.tree)
+        print((f' money: {self.money}').ljust(13) + '| ', end='')
+        print((f'wood: {self.wood}').ljust(11) + '| ', end='')
+        print((f'tree: {self.tree}').ljust(11) + '| ', end='')
+        print((f'flowers: {self.flowers}').ljust(14) + '|')
 
     def buy(self, item):
-        if (item == "tree"):
+        if (item == 'tree'):
             if (self.money > 5):
                 self.money -= 5
                 self.tree += 1
                 return True
         return False
+    
+    def sell(self, item):
+        maxMoney = 9999
