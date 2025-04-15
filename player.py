@@ -1,5 +1,5 @@
 from colorama import Back, Style, Fore
-SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.WHITE
+SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 import inventory
 inv = inventory.Inventory()
 
@@ -7,7 +7,7 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.life = 7
-        self.food = 9
+        self.hung = 9
 
     def showStats(self):
         print()
@@ -15,21 +15,23 @@ class Player:
             self.name = self.name[:15] + "..."
 
         maxWidthWindow = 27
-        print(' info' + '*' * (maxWidthWindow - 4) + '   inventory' + '*' * 48)
+        print(f' {Back.LIGHTBLUE_EX}info{SAFE_RESET}' + '*' * (maxWidthWindow - 4) + f'   {Back.LIGHTBLUE_EX}inventory{SAFE_RESET}' + '*' * 51)
 
         maxLife = 10
-        maxFood = 10
+        maxHung = 10
         emptyLife = '-' * (maxLife - self.life) 
-        emptyFood = '-' * (maxFood - self.food) 
+        emptyHung = '-' * (maxHung - self.hung) 
         lifeBar = '-' * self.life
-        foodBar = '-' * self.food
+        HungBar = '-' * self.hung
 
-        print((f' | name: {self.name}').ljust(maxWidthWindow) + '|   |', end='')
-        inv.showInv()
-        print(f' | life: [{Back.RED}{lifeBar}{SAFE_RESET}{emptyLife}] {self.life}/{maxLife} |')
-        print(f' | food: [{Back.GREEN}{foodBar}{SAFE_RESET}{emptyFood}] {self.food}/{maxFood} |')
-
-        print(' ' + '*' * maxWidthWindow)
+        print((f' | NAME: {self.name}').ljust(maxWidthWindow) + '|   |', end='')
+        inv.showInvFirstLine()
+        print(f' | LIFE: [{Back.RED}{lifeBar}{SAFE_RESET}{emptyLife}] {self.life}/{maxLife} |   | ', end='')
+        inv.showInvSecondLine()
+        print(f' | HUNG: [{Back.GREEN}{HungBar}{SAFE_RESET}{emptyHung}] {self.hung}/{maxHung} |   | ', end='')
+        inv.showInvThirdLine()
+        print(' ' + '*' * maxWidthWindow + '   ', end='')
+        print('*' * 60)
 
     def takeDamage(self):
         if (self.life > -1):
@@ -40,5 +42,5 @@ class Player:
             self.life += 1
 
     def takeFood(self):
-        if (self.food < 11):
-            self.food += 1
+        if (self.hung < 11):
+            self.hung += 1

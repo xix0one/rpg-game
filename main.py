@@ -1,6 +1,7 @@
 from colorama import init, Back, Style
 import windowset
 import player
+import map
 
 init()
 windowset.defaultWindow()
@@ -8,8 +9,6 @@ windowset.defaultWindow()
 name = '--hero 42--'
 
 hero = player.Player(name)
-
 hero.showStats()
+map.printMap()
 
-# def water():
-#     print(Back.BLUE + "~" + Style.RESET_ALL, end='')

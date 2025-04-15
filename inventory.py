@@ -1,29 +1,39 @@
 from colorama import Back, Style, Fore
-SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.WHITE
+SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 
 class Inventory:
     def __init__(self):
-        self.money = 1000
-        self.wood = 15
-        self.tree = 1000
-        self.flowers = 100
-        self.flowerSeeds = 3
-        self.water = 0
+        self.money = 50
+        self.wood = 2
+        self.tree = 3
+        self.flower = 2
+        self.flowerSeed = 3
+        self.water = 1
         self.freshFish = 0
         self.cookedFish = 0
-        self.coal = 0
-        self.coalMine = 0
-        self.diamond = 0
-        self.diamondMine = 0
+        self.iron = 0
         self.gold = 0
-        self.goldMine = 0
-        self.food = 0
+        self.mine = 0
+        self.food = 10
 
-    def showInv(self):
-        print((f' money: {self.money}').ljust(13) + '| ', end='')
-        print((f'wood: {self.wood}').ljust(11) + '| ', end='')
-        print((f'tree: {self.tree}').ljust(11) + '| ', end='')
-        print((f'flowers: {self.flowers}').ljust(14) + '|')
+    def showInvFirstLine(self):
+        print((f' {Fore.LIGHTYELLOW_EX}money:  {self.money}{SAFE_RESET}').ljust(33) + '| ', end='')
+        print((f'{Fore.LIGHTGREEN_EX}food:    {self.food}{SAFE_RESET}').ljust(33) + '| ', end='')
+        print((f'{Fore.LIGHTCYAN_EX}wood: {self.wood}{SAFE_RESET}').ljust(31) + '| ', end='')
+        print((f'{Fore.LIGHTBLUE_EX}water: {self.water}{SAFE_RESET}').ljust(31) + '|')
+
+    def showInvSecondLine(self):
+        print((f'{Fore.LIGHTMAGENTA_EX}flower: {self.flower}{SAFE_RESET}').ljust(32) + '| ', end='')
+        print((f'{Fore.LIGHTCYAN_EX}flowerS: {self.flowerSeed}{SAFE_RESET}').ljust(33) + '| ', end='')
+        print((f'{Fore.LIGHTRED_EX}fish: {self.freshFish}{SAFE_RESET}').ljust(31) + '| ', end='')
+        print((f'{Fore.LIGHTMAGENTA_EX}fishC: {self.cookedFish}{SAFE_RESET}').ljust(31) + '|')
+        
+
+    def showInvThirdLine(self):
+        print((f'{Fore.LIGHTGREEN_EX}tree:   {self.tree}{SAFE_RESET}').ljust(32) + '| ', end='')
+        print((f'{Fore.LIGHTBLUE_EX}mine:    {self.mine}{SAFE_RESET}').ljust(33) + '| ', end='')
+        print((f'iron: {self.iron}').ljust(12) + '| ', end='')
+        print((f'{Fore.LIGHTYELLOW_EX}gold:  {self.gold}{SAFE_RESET}').ljust(31) + '| ')
 
     def buy(self, item):
         if (item == 'tree'):
