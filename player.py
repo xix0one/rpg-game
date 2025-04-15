@@ -3,7 +3,7 @@ SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 import inventory
 inv = inventory.Inventory()
 
-class Player:
+class PlayerInfo:
     def __init__(self, name):
         self.name = name
         self.life = 7
@@ -15,7 +15,7 @@ class Player:
             self.name = self.name[:15] + "..."
 
         maxWidthWindow = 27
-        print(f' {Back.LIGHTBLUE_EX}info{SAFE_RESET}' + '*' * (maxWidthWindow - 4) + f'   {Back.LIGHTBLUE_EX}inventory{SAFE_RESET}' + '*' * 51)
+        print(f' {Back.LIGHTBLUE_EX}info{SAFE_RESET}' + '*' * (maxWidthWindow - 4) + f'   {Back.LIGHTBLUE_EX}inventory{SAFE_RESET}' + '*' * 52)
 
         maxLife = 10
         maxHung = 10
@@ -31,7 +31,7 @@ class Player:
         print(f' | HUNG: [{Back.GREEN}{HungBar}{SAFE_RESET}{emptyHung}] {self.hung}/{maxHung} |   | ', end='')
         inv.showInvThirdLine()
         print(' ' + '*' * maxWidthWindow + '   ', end='')
-        print('*' * 60)
+        print('*' * 61)
 
     def takeDamage(self):
         if (self.life > -1):
