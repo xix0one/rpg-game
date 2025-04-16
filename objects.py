@@ -23,18 +23,15 @@ class Player(Objects):
     def changeCoord(self, y, x):
         self.y = y
         self.x = x
-
+        
     def print(self):
-        currentlook = 0
-        if (self.look == 'left'):
-            currentlook = '<-'
-        if (self.look == 'right'):
-            currentlook = '->'
-        if (self.look == 'down'):
-            currentlook = f'{chr(25)}{chr(25)}'
-        if (self.look == 'up'):
-            currentlook = f'{chr(24)}{chr(24)}'
-        print(Back.RED + f'{currentlook}' + SAFE_RESET, end='')
+        looks = {
+            'left': '<-',
+            'right': '->',
+            'down': f'{chr(25)}{chr(25)}',
+            'up': f'{chr(24)}{chr(24)}'
+        }
+        print(Back.RED + looks[self.look] + SAFE_RESET, end='', flush=True)
 
 class Water(Objects):
     def __init__(self, y, x):
@@ -42,7 +39,7 @@ class Water(Objects):
 
     @staticmethod
     def print():
-        print(Back.LIGHTBLUE_EX + '~~' + SAFE_RESET, end='')
+        print(Back.LIGHTBLUE_EX + '~~' + SAFE_RESET, end='', flush=True)
 
 class Tree(Objects):
     def __init__(self, y, x):
@@ -50,7 +47,7 @@ class Tree(Objects):
 
     @staticmethod
     def print():
-        print(Back.LIGHTGREEN_EX + 'TT' + SAFE_RESET, end='')
+        print(Back.LIGHTGREEN_EX + 'TT' + SAFE_RESET, end='', flush=True)
 
 class Flower(Objects):
     def __init__(self, y, x):
@@ -58,4 +55,20 @@ class Flower(Objects):
 
     @staticmethod
     def print():
-        print(Back.MAGENTA + '**' + SAFE_RESET, end='')
+        print(Back.MAGENTA + '**' + SAFE_RESET, end='', flush=True)
+
+class Mine(Objects):
+    def __init__(self, y, x):
+        super().__init__(y, x)
+
+    @staticmethod
+    def print():
+        print(Back.LIGHTCYAN_EX + '^^' + SAFE_RESET, end='', flush=True)
+
+class Shop(Objects):
+    def __init__(self, y, x):
+        super().__init__(y, x)
+
+    @staticmethod
+    def print():
+        print(f'{Back.LIGHTYELLOW_EX}{Fore.BLACK}' + '++' + SAFE_RESET, end='', flush=True)

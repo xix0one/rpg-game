@@ -1,12 +1,12 @@
 import random
 import helpwin
-from objects import Water, Tree, Flower, Player
+from objects import Water, Tree, Flower, Player, Shop
 from colorama import Back, Style, Fore
 SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 
 map = []
-height = 20
-width = 25
+height = 14
+width = 20
 
 objArr = []
 
@@ -33,17 +33,20 @@ def addObj(count, objClass):
             newObj = objClass(coordY, coordX)
             objArr.append(newObj)
 
-def addPlayer(y, x, look):
-    p = Player(y, x, look)
+def addPlayer(p):
     objArr.append(p)
+
+def addShop(y, x):
+    s = Shop(y, x)
+    objArr.append(s)
 
 def printMap():
     p_in_map = False
-    print(f' {Back.LIGHTBLUE_EX}map{SAFE_RESET}' + '*' * ((width * 2) - 1), end='')
+    print(f'     {Back.LIGHTBLUE_EX}map{SAFE_RESET}' + '*' * ((width * 2) - 1), end='', flush=True)
     helpwin.printBegin()
 
     for y in range(len(map)):
-        print(' |', end='')
+        print('     |', end='')
         for x in range(len(map[y])):
             for i in range(len(objArr)):
                 coord = objArr[i].getCoord()
@@ -55,12 +58,12 @@ def printMap():
                     break
 
             else:
-                print(map[y][x], end='')
+                print(map[y][x], end='', flush=True)
         if p_in_map:
-            print('|(<-)', end='')
+            print('|(<-)', end='', flush=True)
             p_in_map = False
         else:
-            print('|    ', end='')
+            print('|    ', end='', flush=True)
 
         if (y == 1):
             helpwin.printFirst()
@@ -72,9 +75,14 @@ def printMap():
             helpwin.printPosinAnotherLine()
         elif (y == 8):
             helpwin.printDescriptionObj()
-            
+        elif (y == 9):
+            helpwin.printAnotherLineDescription()
+        elif (y == 11):
+            helpwin.printAbbr()
+        elif (y == 12):
+            helpwin.printNextAbbr()
         else:
             helpwin.printLine()
 
-    print(' ' + '*' * ((width * 2) + 2), end='     ')
+    print('     ' + '*' * ((width * 2) + 2), end='     ', flush=True)
     helpwin.printEnd()

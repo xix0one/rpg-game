@@ -35,6 +35,9 @@ class Inventory:
         print((f'iron: {self.iron}').ljust(12) + '| ', end='')
         print((f'{Fore.LIGHTYELLOW_EX}gold:  {self.gold}{SAFE_RESET}').ljust(31) + ' | ')
 
+    def addItem(self):
+        self.flower += 1
+
     def buy(self, item):
         if (item == 'tree'):
             if (self.money > 5):
