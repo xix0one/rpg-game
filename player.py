@@ -15,7 +15,7 @@ class PlayerInfo:
             self.name = self.name[:15] + "..."
 
         maxWidthWindow = 27
-        print(f' {Back.LIGHTBLUE_EX}info{SAFE_RESET}' + '*' * (maxWidthWindow - 4) + f'   {Back.LIGHTBLUE_EX}inventory{SAFE_RESET}' + '*' * 52, flush=True)
+        print(f' {Back.LIGHTBLUE_EX}info{SAFE_RESET}' + '*' * (maxWidthWindow - 4) + f'     {Back.LIGHTBLUE_EX}inventory{SAFE_RESET}' + '*' * 52, flush=True)
 
         maxLife = 10
         maxHung = 10
@@ -24,13 +24,13 @@ class PlayerInfo:
         lifeBar = '-' * self.life
         HungBar = '-' * self.hung
 
-        print((f' | NAME: {self.name}').ljust(maxWidthWindow) + '|   |', end='', flush=True)
+        print((f' | NAME: {self.name}').ljust(maxWidthWindow) + '|     |', end='', flush=True)
         inv.showInvFirstLine()
-        print(f' | LIFE: [{Back.RED}{lifeBar}{SAFE_RESET}{emptyLife}] {self.life}/{maxLife} |   | ', end='', flush=True)
+        print(f' | LIFE: [{Back.RED}{lifeBar}{SAFE_RESET}{emptyLife}] {self.life}/{maxLife} |     | ', end='', flush=True)
         inv.showInvSecondLine()
-        print(f' | HUNG: [{Back.GREEN}{HungBar}{SAFE_RESET}{emptyHung}] {self.hung}/{maxHung} |   | ', end='', flush=True)
+        print(f' | HUNG: [{Back.GREEN}{HungBar}{SAFE_RESET}{emptyHung}] {self.hung}/{maxHung} |     | ', end='', flush=True)
         inv.showInvThirdLine()
-        print(' ' + '*' * maxWidthWindow + '   ', end='', flush=True)
+        print(' ' + '*' * maxWidthWindow + '     ', end='', flush=True)
         print('*' * 61)
 
     def takeHealth(self):

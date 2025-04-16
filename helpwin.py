@@ -5,7 +5,7 @@ def printBegin():
     print(f'   {Back.LIGHTBLUE_EX}help{SAFE_RESET}' + '*' * 32, flush=True)
 
 def printFirst():
-    print((f' | {Back.RED}  {SAFE_RESET}: you, wasd: move, f: use').ljust(53, ' ') + '|', flush=True)
+    print((f' | {Back.RED}  {SAFE_RESET}: you, move: wasd, f: use').ljust(53, ' ') + '|', flush=True)
 
 def printPos():
     print((f' | (<-) between {Back.LIGHTBLUE_EX}map{SAFE_RESET} and {Back.LIGHTBLUE_EX}help{SAFE_RESET} - ').ljust(74, ' ') + '|', flush=True)

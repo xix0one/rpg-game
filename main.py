@@ -4,6 +4,7 @@ import windowset
 import player
 import map
 import actions
+import actionwin
 
 init()
 windowset.defaultWindow()
@@ -20,21 +21,28 @@ map.addObj(1, Water)
 map.addObj(3, Flower)
 map.addObj(1, Mine)
 
-heroAction = actions.Actions(mainPlayer, hero)
+actTextWin = actionwin.TextAction('')
+heroAction = actions.Actions(mainPlayer, hero, actTextWin)
 
-while (1):
+# fix flower !!!
+
+f = True
+while (f):
     print('\033[H\033[J', end='', flush=True) # clear
 
     hero.showStats()
+    actTextWin.printAction()
     map.printMap()
 
     print(' -> ', end='', flush=True)
     key = input()
 
-    if (key == 'd'): heroAction.moveRight()
-    elif (key == 'w'): heroAction.moveUp()
-    elif (key == 'a'): heroAction.moveLeft()
-    elif (key == 's'): heroAction.moveDown()
-    elif (key == 'f'): heroAction.use()
-    else: 
-        break
+    for k in key:
+        if (k == 'd'): heroAction.moveRight()
+        elif (k == 'w'): heroAction.moveUp()
+        elif (k == 'a'): heroAction.moveLeft()
+        elif (k == 's'): heroAction.moveDown()
+        elif (k == 'f'): heroAction.use()
+        else:
+            f = False 
+            break

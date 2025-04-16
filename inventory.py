@@ -1,3 +1,5 @@
+import random
+
 from colorama import Back, Style, Fore
 SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 
@@ -35,16 +37,44 @@ class Inventory:
         print((f'iron: {self.iron}').ljust(12) + '| ', end='')
         print((f'{Fore.LIGHTYELLOW_EX}gold:  {self.gold}{SAFE_RESET}').ljust(31) + ' | ')
 
-    def addItem(self):
-        self.flower += 1
-
-    def buy(self, item):
-        if (item == 'tree'):
-            if (self.money > 5):
-                self.money -= 5
-                self.tree += 1
-                return True
+    def addflowerSeed(self):
+        if random.random() < 0.15:
+            self.flowerSeed += 1
+            return True
         return False
+    
+    def addFlower(self):
+        self.flower += 2
+
+    def addWood(self):
+        self.wood += 3
+
+    def addIron(self):
+        self.iron += 1
+
+    def addGold(self):
+        if random.random() < 0.15:
+            self.gold += 1
+            return True
+        return False
+
+    def getTotal(self, obj):
+        objs = {
+            'flower': self.flower,
+            'flowerSeed': self.flowerSeed,
+            'wood': self.wood,
+            'iron': self.iron,
+            'gold': self.gold
+        }
+        return objs[obj]
+
+    # def buy(self, item):
+    #     if (item == 'tree'):
+    #         if (self.money > 5):
+    #             self.money -= 5
+    #             self.tree += 1
+    #             return True
+    #     return False
     
     def sell(self, item):
         maxMoney = 9999
