@@ -62,11 +62,11 @@ def addShop(y, x):
 
 def printMap():
     p_in_map = False
-    print(f'      {Back.LIGHTBLUE_EX}map{SAFE_RESET}' + '*' * ((width * 2) - 1), end='', flush=True)
+    print(f'    {Back.LIGHTBLUE_EX}map{SAFE_RESET}' + '*' * ((width * 2) - 1), end='', flush=True)
     helpwin.printBegin()
 
     for y in range(len(map)):
-        print('      |', end='')
+        print('    |', end='')
         for x in range(len(map[y])):
             for i in range(len(objArr)):
                 coord = objArr[i].getCoord()
@@ -104,5 +104,5 @@ def printMap():
         else:
             helpwin.printLine()
 
-    print('      ' + '*' * ((width * 2) + 2), end='     ', flush=True)
+    print('    ' + '*' * ((width * 2) + 2), end='     ', flush=True)
     helpwin.printEnd()

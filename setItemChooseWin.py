@@ -7,9 +7,6 @@ from colorama import Back, Style, Fore
 SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
 
 actTextWin = actionwin.TextAction('')
-items =  [f' tree        | {inv.getTotal("tree")}', f' water       | {inv.getTotal("water")}', 
-          f' mine        | {inv.getTotal("mine")}', f' flower seed | {inv.getTotal("flowerSeed")}',
-          f' bonfire     | {inv.getTotal("bonfire")}']
 
 class Arrow():
     def __init__(self):
@@ -19,10 +16,10 @@ class Arrow():
         if (self.pos > 0):
             self.pos -= 1
         else:
-            self.pos = len(items) - 1
+            self.pos = 4
 
     def arrowDown(self):
-        if (self.pos < len(items) - 1):
+        if (self.pos < 4):
             self.pos += 1
         else:
             self.pos = 0
@@ -33,6 +30,10 @@ class Arrow():
 arrow = Arrow()
 
 def printItems():
+    items =  [f' tree        | {inv.getTotal("tree")}', f' water       | {inv.getTotal("water")}', 
+              f' mine        | {inv.getTotal("mine")}', f' flower seed | {inv.getTotal("flowerSeed")}',
+              f' bonfire     | {inv.getTotal("bonfire")}']
+    
     actTextWin.setText('choose item; w or s - move arrow; e - set item; q - exit')
     actTextWin.printAction()
 
@@ -79,19 +80,39 @@ def setObj():
         coordPlayer[1] += 1
 
     if (arrow.getPos() == 0):
-        tree = Tree(coordPlayer[0], coordPlayer[1])
-        f = map.setObj(tree)
+        if (inv.getTotal('tree')):
+            tree = Tree(coordPlayer[0], coordPlayer[1])
+            f = map.setObj(tree)
+            if (f): inv.reduceTotal('tree')
+        else: f = False
+
     elif (arrow.getPos() == 1):
-        water = Water(coordPlayer[0], coordPlayer[1])
-        f = map.setObj(water)
+        if (inv.getTotal('water')):
+            water = Water(coordPlayer[0], coordPlayer[1])
+            f = map.setObj(water)
+            if (f): inv.reduceTotal('water')
+        else: f = False
+
     elif (arrow.getPos() == 2):
-        mine = Mine(coordPlayer[0], coordPlayer[1])
-        f = map.setObj(mine)
+        if (inv.getTotal('mine')):
+            mine = Mine(coordPlayer[0], coordPlayer[1])
+            f = map.setObj(mine)
+            if (f): inv.reduceTotal('mine')
+        else: f = False
+
     elif (arrow.getPos() == 3):
-        flower = Flower(coordPlayer[0], coordPlayer[1])
-        f = map.setObj(flower)
+        if (inv.getTotal('flowerSeed')):
+            flower = Flower(coordPlayer[0], coordPlayer[1])
+            f = map.setObj(flower)
+            if (f): inv.reduceTotal('flowerSeed')
+        else: f = False
+
     elif (arrow.getPos() == 4):
-        bonfire = Bonfire(coordPlayer[0], coordPlayer[1])
-        f = map.setObj(bonfire)
+        if (inv.getTotal('bonfire')):
+            bonfire = Bonfire(coordPlayer[0], coordPlayer[1])
+            f = map.setObj(bonfire)
+            if (f): inv.reduceTotal('flowerSeed')
+            inv.reduceTotal('bonfire')
+        else: f = False
 
     return f

@@ -1,6 +1,6 @@
 from player import inv
 from map import objArr
-from objects import Flower, Tree, Mine, Water
+from objects import Flower, Tree, Mine, Water, Bonfire
 
 from colorama import Back, Style, Fore
 SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
@@ -10,6 +10,11 @@ class Actions():
         self.player = player
         self.hero = hero
         self.textAction = textAction
+
+    def eat(self):
+        if (inv.getTotal('cookedFish')):
+            self.hero.takeHealth()
+            inv.reduceTotal('cookedFish')
 
     def moveRight(self):
         if (self.player.look != 'right'):
@@ -129,6 +134,18 @@ class Actions():
                         else:
                             self.textAction.setText(f'take iron + 1; total: {inv.getTotal("iron")}; reserve: {objArr[i].getReserve()}')
                     break
-                    
+                
+                if isinstance(objArr[i], Bonfire):
+                    if (inv.getTotal("fish")):
+                        objArr[i].reductionReserve()
+                        inv.reduceTotal('freshFish')
+                        inv.addCookedFish()
+                        if (objArr[i].getReserve() == 0):
+                            self.textAction.setText(f'take cooked fish + 1; fresh fish - 1; total cooked: {inv.getTotal("cookedFish")}, fresh fish: {inv.getTotal("fish")}; bonfire destroyed!')
+                            objArr.pop(i)
+                        else:
+                            self.textAction.setText(f'take cooked fish + 1; fresh fish - 1; total cooked: {inv.getTotal("cookedFish")}, fresh fish: {inv.getTotal("fish")}; reserve: {objArr[i].getReserve()}')
+                    else:
+                        self.textAction.setText('no fish for cooked')
                 
         

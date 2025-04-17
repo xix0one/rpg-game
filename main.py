@@ -46,6 +46,7 @@ while (f):
             elif (k == 'a'): heroAction.moveLeft()
             elif (k == 's'): heroAction.moveDown()
             elif (k == 'f'): heroAction.use()
+            elif (k == 'r'): heroAction.eat()
             elif (k == 'e'):
                 mainWin = False
                 chooseItems = True
@@ -72,10 +73,10 @@ while (f):
                     setItemChooseWin.fakeplayer.setlook(mainPlayer.getLook())
 
                     if (setItemChooseWin.setObj() == False):
-                        actTextWin.setText('nope')
+                        actTextWin.setText('you cant do it')
                         actTextWin.printAction()
                     else:
-                        actTextWin.setText('put')
+                        actTextWin.setText('put item')
                         actTextWin.printAction()
                     mainWin = True
                     chooseItems = False
