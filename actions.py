@@ -1,6 +1,6 @@
 from player import inv
 from map import objArr
-from objects import Flower, Tree, Mine
+from objects import Flower, Tree, Mine, Water
 
 from colorama import Back, Style, Fore
 SAFE_RESET = Style.RESET_ALL + Back.BLACK + Fore.LIGHTWHITE_EX
@@ -74,16 +74,16 @@ class Actions():
                     objArr[i].reductionReserve()
                     if inv.addflowerSeed():
                         if (objArr[i].getReserve() == 0):
-                            self.textAction.setText(f'take flower + 2 and {Fore.LIGHTCYAN_EX}+ 1 flower seed!{SAFE_RESET}; total flower: {inv.getTotal('flowerSeed')}, flower seed: {inv.getTotal('flowerSeed')}; flower destroyed!', 112)
+                            self.textAction.setText(f'take flower + 2 and {Fore.LIGHTCYAN_EX}+ 1 flower seed!{SAFE_RESET}; total flower: {inv.getTotal("flower")}, flower seed: {inv.getTotal("flowerSeed")}; flower destroyed!', 112)
                             objArr.pop(i)
                         else:
-                            self.textAction.setText(f'take flower + 2 and {Fore.LIGHTCYAN_EX}+ 1 flower seed!{SAFE_RESET}; total flower: {inv.getTotal('flower')}, flower seed: {inv.getTotal('flowerSeed')}; reserve: {objArr[i].getReserve()}', 112)
+                            self.textAction.setText(f'take flower + 2 and {Fore.LIGHTCYAN_EX}+ 1 flower seed!{SAFE_RESET}; total flower: {inv.getTotal("flower")}, flower seed: {inv.getTotal("flowerSeed")}; reserve: {objArr[i].getReserve()}', 112)
                     else:
                         if (objArr[i].getReserve() == 0):
-                            self.textAction.setText(f'take flower + 2; total: {inv.getTotal('flower')}; flower destroyed')
+                            self.textAction.setText(f'take flower + 2; total: {inv.getTotal("flower")}; flower destroyed')
                             objArr.pop(i)
                         else:
-                            self.textAction.setText(f'take flower + 2; total: {inv.getTotal('flower')}; reserve: {objArr[i].getReserve()}')
+                            self.textAction.setText(f'take flower + 2; total: {inv.getTotal("flower")}; reserve: {objArr[i].getReserve()}')
 
                     break
 
@@ -91,10 +91,26 @@ class Actions():
                     inv.addWood()
                     objArr[i].reductionReserve()
                     if (objArr[i].getReserve() == 0):
-                        self.textAction.setText(f'take wood + 3; total: {inv.getTotal('wood')}; tree destroyed!')
+                        self.textAction.setText(f'take wood + 3; total: {inv.getTotal("wood")}; tree destroyed!')
                         objArr.pop(i)
                     else:
-                        self.textAction.setText(f'take wood + 3; total: {inv.getTotal('wood')}; reserve: {objArr[i].getReserve()}')
+                        self.textAction.setText(f'take wood + 3; total: {inv.getTotal("wood")}; reserve: {objArr[i].getReserve()}')
+                    break
+
+                if isinstance(objArr[i], Water):
+                    objArr[i].reductionReserve()
+                    if (objArr[i].getReserve() == 0):
+                        if (inv.addFish()):
+                            self.textAction.setText(f'take fish + 1; total fish: {inv.getTotal("fish")}; water destroyed!')
+                            objArr.pop(i)
+                        else:
+                            self.textAction.setText(f'didnt catch; total fish: {inv.getTotal("fish")}; water destroyed!')
+                            objArr.pop(i)
+                    else:
+                        if (inv.addFish()):
+                            self.textAction.setText(f'take fish + 1; total fish: {inv.getTotal("fish")}; reserve: {objArr[i].getReserve()}')
+                        else:
+                            self.textAction.setText(f'didnt catch; total fish: {inv.getTotal("fish")}; reserve: {objArr[i].getReserve()}')
                     break
 
                 if isinstance(objArr[i], Mine):
@@ -102,16 +118,17 @@ class Actions():
                     objArr[i].reductionReserve()
                     if inv.addGold():
                         if (objArr[i].getReserve() == 0):
-                            self.textAction.setText(f'take iron + 1 and {Fore.YELLOW}+ 1 gold!{SAFE_RESET}; total iron: {inv.getTotal('iron')}, gold: {inv.getTotal('gold')}; mine destroyed!', 112)
+                            self.textAction.setText(f'take iron + 1 and {Fore.YELLOW}+ 1 gold!{SAFE_RESET}; total iron: {inv.getTotal("iron")}, gold: {inv.getTotal("gold")}; mine destroyed!', 112)
                             objArr.pop(i)
                         else:
-                            self.textAction.setText(f'take iron + 1 and {Fore.YELLOW}+ 1 gold!{SAFE_RESET}; total iron: {inv.getTotal('iron')}, gold: {inv.getTotal('gold')}; reserve: {objArr[i].getReserve()}', 112)
+                            self.textAction.setText(f'take iron + 1 and {Fore.YELLOW}+ 1 gold!{SAFE_RESET}; total iron: {inv.getTotal("iron")}, gold: {inv.getTotal("gold")}; reserve: {objArr[i].getReserve()}', 112)
                     else:
                         if (objArr[i].getReserve() == 0):
-                            self.textAction.setText(f'take iron + 1; total: {inv.getTotal('iron')}; mine destroyed!')
+                            self.textAction.setText(f'take iron + 1; total: {inv.getTotal("iron")}; mine destroyed!')
                             objArr.pop(i)
                         else:
-                            self.textAction.setText(f'take iron + 1; total: {inv.getTotal('iron')}; reserve: {objArr[i].getReserve()}')
+                            self.textAction.setText(f'take iron + 1; total: {inv.getTotal("iron")}; reserve: {objArr[i].getReserve()}')
                     break
                     
                 
+        

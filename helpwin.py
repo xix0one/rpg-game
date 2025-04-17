@@ -18,7 +18,7 @@ def printArrow():
 def printDescriptionObj():
     print((f' | {Back.LIGHTBLUE_EX}~{SAFE_RESET}: water, {Back.LIGHTGREEN_EX}T{SAFE_RESET}: tree, {Back.MAGENTA}*{SAFE_RESET}: flower,').ljust(93, ' ') + '|', flush=True)
 def printAnotherLineDescription():
-    print((f' | {Back.LIGHTCYAN_EX}^{SAFE_RESET}: mine, {Back.LIGHTYELLOW_EX}{Fore.BLACK}+{SAFE_RESET}: shop').ljust(79, ' ') + '|', flush=True)
+    print((f' | {Back.LIGHTCYAN_EX}^{SAFE_RESET}: mine, {Back.LIGHTYELLOW_EX}{Fore.BLACK}+{SAFE_RESET}: shop, {Back.YELLOW}"{SAFE_RESET}: bonfire').ljust(98, ' ') + '|', flush=True)
 
 def printAbbr():
     print((f' | {Fore.LIGHTCYAN_EX}flowerS{SAFE_RESET}: flower seed,').ljust(53, ' ') + '|', flush=True)

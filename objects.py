@@ -24,6 +24,9 @@ class Player(Objects):
     def changeLook(self, look):
         self.look = look
 
+    def getLook(self):
+        return self.look
+
     def changeCoord(self, y, x):
         self.y = y
         self.x = x
@@ -40,11 +43,14 @@ class Player(Objects):
 class Water(Objects):
     def __init__(self, y, x):
         super().__init__(y, x)
-        self.reserve = 10
+        self.reserve = 20
 
     @staticmethod
     def print():
         print(Back.LIGHTBLUE_EX + '~~' + SAFE_RESET, end='', flush=True)
+
+    def reductionReserve(self):
+        self.reserve -= 1
 
 class Tree(Objects):
     def __init__(self, y, x):
@@ -69,6 +75,18 @@ class Flower(Objects):
 
     def reductionReserve(self):
         self.reserve -= 2
+
+class Bonfire(Objects):
+    def __init__(self, y, x):
+        super().__init__(y, x)
+        self.reserve = 30
+
+    @staticmethod
+    def print():
+        print(Back.YELLOW + '""' + SAFE_RESET, end='', flush=True)
+
+    def reductionReserve(self):
+        self.reserve -= 1
 
 class Mine(Objects):
     def __init__(self, y, x):

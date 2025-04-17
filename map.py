@@ -33,6 +33,26 @@ def addObj(count, objClass):
             newObj = objClass(coordY, coordX)
             objArr.append(newObj)
 
+def setObj(o):
+    
+    coordNewObj = o.getCoord()
+    f = True
+
+    if (coordNewObj[0] < 0 or coordNewObj[0] > height - 1 or
+        coordNewObj[1] < 0 or coordNewObj[1] > width - 1):
+        f = False
+    else:
+        for i in range(len(objArr)):
+            coords = objArr[i].getCoord()
+            if (coordNewObj[0] == coords[0] and coordNewObj[1] == coords[1]):
+                f = False
+                break
+    
+    if (f):
+        objArr.append(o)
+        return True
+    return False
+
 def addPlayer(p):
     objArr.append(p)
 

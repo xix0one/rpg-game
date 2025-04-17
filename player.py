@@ -30,8 +30,9 @@ class PlayerInfo:
         inv.showInvSecondLine()
         print(f' | HUNG: [{Back.GREEN}{HungBar}{SAFE_RESET}{emptyHung}] {self.hung}/{maxHung} |     | ', end='', flush=True)
         inv.showInvThirdLine()
-        print(' ' + '*' * maxWidthWindow + '     ', end='', flush=True)
-        print('*' * 61)
+        print(' ' + '*' * maxWidthWindow + '     | ', end='', flush=True)
+        inv.showInvFourthLine()
+        print(' '.ljust(33) + ('*' * 61))
 
     def takeHealth(self):
         if (self.life < 11):
