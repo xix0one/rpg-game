@@ -56,8 +56,7 @@ def setObj(o):
 def addPlayer(p):
     objArr.append(p)
 
-def addShop(y, x):
-    s = Shop(y, x)
+def addShop(s):
     objArr.append(s)
 
 def printMap():
@@ -87,19 +86,21 @@ def printMap():
 
         if (y == 1):
             helpwin.printFirst()
-        elif (y == 3):
+        elif (y == 2):
+            helpwin.printFirstContinue()
+        elif (y == 4):
             helpwin.printArrow()
-        elif (y == 5):
-            helpwin.printPos()
         elif (y == 6):
+            helpwin.printPos()
+        elif (y == 7):
             helpwin.printPosinAnotherLine()
-        elif (y == 8):
-            helpwin.printDescriptionObj()
         elif (y == 9):
+            helpwin.printDescriptionObj()
+        elif (y == 10):
             helpwin.printAnotherLineDescription()
-        elif (y == 11):
-            helpwin.printAbbr()
         elif (y == 12):
+            helpwin.printAbbr()
+        elif (y == 13):
             helpwin.printNextAbbr()
         else:
             helpwin.printLine()

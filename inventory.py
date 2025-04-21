@@ -12,12 +12,28 @@ class Inventory:
         self.flowerSeed = 3
         self.water = 1
         self.freshFish = 0
-        self.cookedFish = 2
+        self.cookedFish = 0
         self.iron = 0
         self.gold = 0
         self.mine = 0
-        self.food = 0
+        self.food = 3
         self.bonfire = 1
+
+        self.costs = {
+            'flowerSeed': 10,
+            'tree': 15,
+            'water': 15,
+            'mine': 100,
+            'bonfire': 5,
+            'food': 20,
+
+            'wood': 3,
+            'flower': 3,
+            'cookedFish': 7,
+            'iron': 10,
+            'gold': 15,
+            'fish': 5
+        }
 
     def showInvFirstLine(self):
         print((f'     | {Fore.LIGHTYELLOW_EX}money:   {self.money}{SAFE_RESET} ').ljust(40) + '| ', end='')
@@ -30,7 +46,6 @@ class Inventory:
         print((f'{Fore.LIGHTCYAN_EX}flowerS: {self.flowerSeed}{SAFE_RESET}').ljust(33) + '| ', end='')
         print((f'{Fore.LIGHTRED_EX}fish: {self.freshFish}{SAFE_RESET}').ljust(31) + '| ', end='')
         print((f'{Fore.LIGHTMAGENTA_EX}fishC: {self.cookedFish}{SAFE_RESET}').ljust(30) + ' |')
-        
 
     def showInvThirdLine(self):
         print((f'     | {Fore.LIGHTGREEN_EX}tree:    {self.tree}{SAFE_RESET}').ljust(40) + '| ', end='')
@@ -97,6 +112,9 @@ class Inventory:
             'food': self.food
         }
         return objs[obj]
+    
+    def getCost(self, obj):
+        return self.costs[obj]
 
     def reduceTotal(self, obj):
         if (obj == 'tree'):
@@ -127,6 +145,14 @@ class Inventory:
             if (self.cookedFish > 0):
                 self.cookedFish -= 1
 
+        if (obj == 'food'):
+            if (self.food > 0):
+                self.food -= 1
+
+        if (obj == 'flower'):
+            if (self.flower > 0):
+                self.flower -= 1
+
     # def buy(self, item):
     #     if (item == 'tree'):
     #         if (self.money > 5):
@@ -137,3 +163,5 @@ class Inventory:
     
     def sell(self, item):
         maxMoney = 9999
+        if ((self.money + self.getCost(item)) < maxMoney):
+            self.money += self.getCost(item)

@@ -11,15 +11,19 @@ actTextWin = actionwin.TextAction('')
 class Arrow():
     def __init__(self):
         self.pos = 0
+        self.count = 0
+
+    def setCountObj(self, c):
+        self.count = c
 
     def arrowUp(self):
         if (self.pos > 0):
             self.pos -= 1
         else:
-            self.pos = 4
+            self.pos = self.count
 
     def arrowDown(self):
-        if (self.pos < 4):
+        if (self.pos < self.count):
             self.pos += 1
         else:
             self.pos = 0
@@ -27,12 +31,17 @@ class Arrow():
     def getPos(self):
         return self.pos
     
+    def setPos(self, p):
+        self.pos = p
+    
 arrow = Arrow()
 
 def printItems():
     items =  [f' tree        | {inv.getTotal("tree")}', f' water       | {inv.getTotal("water")}', 
               f' mine        | {inv.getTotal("mine")}', f' flower seed | {inv.getTotal("flowerSeed")}',
               f' bonfire     | {inv.getTotal("bonfire")}']
+    
+    arrow.setCountObj(len(items) - 1)
     
     actTextWin.setText('choose item; w or s - move arrow; e - set item; q - exit')
     actTextWin.printAction()

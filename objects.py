@@ -103,7 +103,16 @@ class Mine(Objects):
 class Shop(Objects):
     def __init__(self, y, x):
         super().__init__(y, x)
+        self.choose = False
+
+    def setChoose(self, b):
+        self.choose = b
+
+    def getChoose(self):
+        return self.choose
 
     @staticmethod
     def print():
         print(f'{Back.LIGHTYELLOW_EX}{Fore.BLACK}' + '++' + SAFE_RESET, end='', flush=True)
+
+    

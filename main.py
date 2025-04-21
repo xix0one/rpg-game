@@ -6,6 +6,7 @@ import map
 import actions
 import actionwin
 import setItemChooseWin
+import shopWinBuy
 
 init()
 windowset.defaultWindow()
@@ -13,10 +14,10 @@ windowset.defaultWindow()
 n = '--hero 42--'
 
 hero = player.PlayerInfo(n)
-mainPlayer = Player(1, 10, 'right')
+mainPlayer = Player(0, 18, 'right')
 
 map.addPlayer(mainPlayer)
-map.addShop(0, 19)
+map.addShop(actions.shop)
 map.addObj(2, Tree)
 map.addObj(1, Water)
 map.addObj(3, Flower)
@@ -27,11 +28,12 @@ actTextWin = actionwin.TextAction('')
 heroAction = actions.Actions(mainPlayer, hero, actTextWin)
 
 f = True
-mainWin = True
+mainWin = False
 chooseItems = False
+shopWin = True
+
 while (f):
     print('\033[H\033[J', end='', flush=True) # clear
-
     hero.showStats()
 
     if (mainWin):
@@ -45,7 +47,12 @@ while (f):
             elif (k == 'w'): heroAction.moveUp()
             elif (k == 'a'): heroAction.moveLeft()
             elif (k == 's'): heroAction.moveDown()
-            elif (k == 'f'): heroAction.use()
+            elif (k == 'f'): 
+                heroAction.use()
+                if (actions.shop.getChoose()):
+                    mainWin = False
+                    shopWin = True
+                    break
             elif (k == 'r'): heroAction.eat()
             elif (k == 'e'):
                 mainWin = False
@@ -54,30 +61,46 @@ while (f):
             else:
                 f = False 
                 break
-    else:
-        if (chooseItems):
-            setItemChooseWin.printItems()
-            print('  -> ', end='', flush=True)
-            key = input()
-            for k in key:
-                if k == 'q':
-                    mainWin = True
-                    chooseItems = False
-                    break
-                if k == 'w':
-                    setItemChooseWin.arrow.arrowUp()
-                if k == 's':
-                    setItemChooseWin.arrow.arrowDown()
-                if k == 'e':
-                    setItemChooseWin.fakeplayer.setCoord(mainPlayer.getCoord())
-                    setItemChooseWin.fakeplayer.setlook(mainPlayer.getLook())
-
-                    if (setItemChooseWin.setObj() == False):
-                        actTextWin.setText('you cant do it')
-                        actTextWin.printAction()
-                    else:
-                        actTextWin.setText('put item')
-                        actTextWin.printAction()
-                    mainWin = True
-                    chooseItems = False
-                    break 
+    elif (chooseItems):
+        setItemChooseWin.printItems()
+        print('  -> ', end='', flush=True)
+        key = input()
+        for k in key:
+            if k == 'q':
+                mainWin = True
+                chooseItems = False
+                setItemChooseWin.arrow.setPos(0)
+                break
+            if k == 'w':
+                setItemChooseWin.arrow.arrowUp()
+            if k == 's':
+                setItemChooseWin.arrow.arrowDown()
+            if k == 'e':
+                setItemChooseWin.fakeplayer.setCoord(mainPlayer.getCoord())
+                setItemChooseWin.fakeplayer.setlook(mainPlayer.getLook())
+                if (setItemChooseWin.setObj() == False):
+                    actTextWin.setText('you cant do it')
+                    actTextWin.printAction()
+                else:
+                    actTextWin.setText('item put')
+                    actTextWin.printAction()
+                mainWin = True
+                chooseItems = False
+                break
+    elif (shopWin):
+        shopWinBuy.printShop()
+        print('  -> ', end='', flush=True)
+        key = input()
+        for k in key:
+            if k == 'q':
+                actions.shop.setChoose(False)
+                mainWin = True
+                shopWin = False
+                setItemChooseWin.arrow.setPos(0)
+                break
+            if k == 'w':
+                setItemChooseWin.arrow.arrowUp()
+            if k == 's':
+                setItemChooseWin.arrow.arrowDown()
+            if k == 'e':
+                shopWinBuy.buySellItem()
