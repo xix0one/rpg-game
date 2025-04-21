@@ -6,7 +6,7 @@ inv = inventory.Inventory()
 class PlayerInfo:
     def __init__(self, name):
         self.name = name
-        self.life = 7
+        self.life = 8
         self.hung = 9
 
     def showStats(self):
@@ -46,4 +46,7 @@ class PlayerInfo:
         else:
             if (self.life > 0):
                 self.life -= 1
+
+    def getHealth(self):
+        return self.life
             

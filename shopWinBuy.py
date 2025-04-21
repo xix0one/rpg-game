@@ -70,3 +70,8 @@ def buySellItem():
             textInfo = f'you sell {selectedKey}'
         else:
             textInfo = f'you cant do it'
+    else:
+        if (inv.buy(selectedKey)):
+            textInfo = f'you buy {selectedKey}'
+        else:
+            textInfo = f'need more money'

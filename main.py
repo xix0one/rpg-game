@@ -28,9 +28,9 @@ actTextWin = actionwin.TextAction('')
 heroAction = actions.Actions(mainPlayer, hero, actTextWin)
 
 f = True
-mainWin = False
+mainWin = True
 chooseItems = False
-shopWin = True
+shopWin = False
 
 while (f):
     print('\033[H\033[J', end='', flush=True) # clear
@@ -96,6 +96,7 @@ while (f):
                 actions.shop.setChoose(False)
                 mainWin = True
                 shopWin = False
+                shopWinBuy.textInfo = 'choose item; w or s - move arrow; e - buy/sell item; q - exit'
                 setItemChooseWin.arrow.setPos(0)
                 break
             if k == 'w':

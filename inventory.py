@@ -30,8 +30,8 @@ class Inventory:
             'wood': 3,
             'flower': 3,
             'cookedFish': 7,
-            'iron': 10,
-            'gold': 15,
+            'iron': 20,
+            'gold': 40,
             'fish': 5
         }
 
@@ -96,6 +96,20 @@ class Inventory:
             return True
         return False
 
+    def setTotal(self, obj):
+        if (obj == 'tree'):
+            self.tree += 1
+        if (obj == 'water'):
+            self.water += 1
+        if (obj == 'mine'):
+            self.mine += 1
+        if (obj == 'flowerSeed'):
+            self.flowerSeed += 1
+        if (obj == 'bonfire'):
+            self.bonfire += 1
+        if (obj == 'food'):
+            self.food += 1
+
     def getTotal(self, obj):
         objs = {
             'flower': self.flower,
@@ -153,13 +167,28 @@ class Inventory:
             if (self.flower > 0):
                 self.flower -= 1
 
-    # def buy(self, item):
-    #     if (item == 'tree'):
-    #         if (self.money > 5):
-    #             self.money -= 5
-    #             self.tree += 1
-    #             return True
-    #     return False
+        if (obj == 'wood'):
+            if (self.wood > 0):
+                self.wood -= 1
+
+        if (obj == 'iron'):
+            if (self.iron > 0):
+                self.iron -= 1
+
+        if (obj == 'gold'):
+            if (self.gold > 0):
+                self.gold -= 1
+
+        if (obj == 'fish'):
+            if (self.freshFish > 0):
+                self.freshFish -= 1
+
+    def buy(self, item):
+        if (self.getCost(item) <= self.money):
+            self.money -= self.getCost(item)
+            self.setTotal(item)
+            return True
+        return False
     
     def sell(self, item):
         maxMoney = 9999

@@ -81,7 +81,7 @@ class Actions():
 
         for i in range(len(objArr)):
             if (objArr[i].getCoord() == coords):
-
+                self.textAction.setText("fff")
                 if (isinstance(objArr[i], Shop)):
                     shop.setChoose(True)
                     break
