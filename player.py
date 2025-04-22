@@ -6,8 +6,8 @@ inv = inventory.Inventory()
 class PlayerInfo:
     def __init__(self, name):
         self.name = name
-        self.life = 8
-        self.hung = 9
+        self.life = 10
+        self.hung = 6
 
     def showStats(self):
         print()
