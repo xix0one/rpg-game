@@ -1,12 +1,12 @@
-a console game about resource grinding for food
+# A console game about resource grinding for food
 
 for colorama: pip install colorama
 
-gameplay:
+## Gameplay Preview:
 ![preview-gameplay](preview/1.PNG)
 
-set cell:
+## Cell Management:
 ![preview-set-item](preview/2.PNG)
 
-shop:
+## Shop System  
 ![preview-shop](preview/3.PNG)
