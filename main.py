@@ -116,5 +116,6 @@ loop()
 
 print('\033[H\033[J', end='', flush=True) # clear
 hero.showStats()
+map.printMap()
 if (hero.getHealth() < 1):
-    print("\t*** you lose ****")
+    print("\t*** you lose ***")
