@@ -8,5 +8,5 @@ for colorama: pip install colorama
 ## Cell Management:
 ![preview-set-item](preview/2.PNG)
 
-## Shop System  
+## Shop System:  
 ![preview-shop](preview/3.PNG)
